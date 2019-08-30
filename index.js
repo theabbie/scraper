@@ -26,20 +26,19 @@ app.get('/', async function(req, res) {
     var patt = new RegExp(req.query.patt || ".*","i");
     $(req.query.sel,code).each(function(i,elem) {
     if($(this).attribs && patt.test($(this).attribs[req.query.attribs])) {
-    result.push({attrib: $(this).attribs[req.query.attribs], text: $(this).text()})
+    result.push({"attrib": $(this).attribs[req.query.attribs], "text": $(this).text()})
     }
     })
     res.json(result)
 }
 else {
     rp(req.query.url).then(function(code){
-    var rslt = $(req.query.sel,code)
     res.setHeader("Access-Control-Allow-Origin", "*");
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
     $(req.query.sel,code).each(function(i,elem) {
     if($(this).attribs && patt.test($(this).attribs[req.query.attribs])) {
-    result.push({attrib: $(this).attribs[req.query.attribs], text: $(this).text()})
+    result.push({"attrib": $(this).attribs[req.query.attribs], "text": $(this).text()})
     }
     })
     res.json(result)  
