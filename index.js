@@ -21,35 +21,27 @@ app.get('/', async function(req, res) {
     await page.goto(req.query.url);
     await page.waitFor(5500)
     var code = await page.evaluate(function() {return document.querySelector("html").outerHTML})
-    var tp = req.query.var || "";
-    var variable = await page.evaluate(function(tp) {return eval(tp)},tp)
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    var result = []
+    var patt = new RegExp(req.query.patt || ".*","i");
+    $(req.query.sel,code).each(function(i,elem) {
+    if($(this).attribs && patt.test($(this).attribs[req.query.attribs])) {
+    result.push({attrib: $(this).attribs[req.query.attribs], text: $(this).text()})
+    }
+    })
+    res.json(result)
+}
+else {
+    rp(req.query.url).then(function(code){
     var rslt = $(req.query.sel,code)
     res.setHeader("Access-Control-Allow-Origin", "*");
     var result = []
-    var x;
     var patt = new RegExp(req.query.patt || ".*","i");
-    for (x in rslt) {
-      if (rslt[x].attribs && patt.test(rslt[x].attribs[req.query.attribs])) {
-  result.push(rslt[x].attribs[req.query.attribs])
-      }
+    $(req.query.sel,code).each(function(i,elem) {
+    if($(this).attribs && patt.test($(this).attribs[req.query.attribs])) {
+    result.push({attrib: $(this).attribs[req.query.attribs], text: $(this).text()})
     }
-    result.push(rslt.html())
-    res.json(result)
-        }
-        else {
-            rp(req.query.url).then(function(code){
-              var rslt = $(req.query.sel,code)
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    var result = []
-    var x;
-    var patt = new RegExp(req.query.patt || ".*","i");
-    for (x in rslt) {
-      if (rslt[x].attribs && patt.test(rslt[x].attribs[req.query.attribs])) {
-  result.push(rslt[x].attribs[req.query.attribs])
-      }
-    }
-    result.push(rslt.html())
-    result.push(variable)
+    })
     res.json(result)  
             })
         }
