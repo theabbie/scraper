@@ -19,7 +19,7 @@ app.get('/', async function(req, res) {
   await page.setUserAgent(req.headers["user-agent"]);
     await page.setViewport({width: 1366, height: 654});
     await page.goto(req.query.url);
-    await page.waitFor(5500)
+    await page.waitFor(3000)
     var code = await page.evaluate(function() {return document.querySelector("html").outerHTML})
     res.setHeader("Access-Control-Allow-Origin", "*");
     var result = []
