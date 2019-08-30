@@ -25,8 +25,8 @@ app.get('/', async function(req, res) {
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
     $(req.query.sel,code).each(function(i,elem) {
-    if($(this).attribs && patt.test($(this).attribs[req.query.attribs])) {
-    result.push({"attrib": $(this).attribs[req.query.attribs], "text": $(this).text()})
+    if(patt.test($(this).attr(req.query.attribs))) {
+    result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
     res.json(result)
@@ -37,8 +37,8 @@ else {
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
     $(req.query.sel,code).each(function(i,elem) {
-    if($(this).attribs && patt.test($(this).attribs[req.query.attribs])) {
-    result.push({"attrib": $(this).attribs[req.query.attribs], "text": $(this).text()})
+    if(patt.test($(this).attr(req.query.attribs))) {
+    result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
     res.json(result)  
