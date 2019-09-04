@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const req = require('request');
 const rp = require('request-promise');
-app.set('json spaces', 2)
+app.set('json spaces', 2);
 const chrome = require('chrome-aws-lambda');
 const puppeteer = require('puppeteer-core');
 const $ = require("cheerio");
