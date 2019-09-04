@@ -29,7 +29,7 @@ app.get('/', async function(req, res) {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    res.json(result)
+    if (!req.query.join) {res.json(result)} else {res.end(result.map(x => x.text).join(req.query.join))}
 }
 else {
     rp(req.query.url).then(function(code){
@@ -41,7 +41,7 @@ else {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    res.json(result)  
+    if (!req.query.join) {res.json(result)} else {res.end(result.map(x => x.text).join(req.query.join))}
             })
         }
     }
