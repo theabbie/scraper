@@ -9,6 +9,7 @@ const $ = require("cheerio");
     
 app.get('/', async function(req, res) {
     try {
+        res.setHeader("Access-Control-Allow-Origin","*");
         if (req.query.static!="true") {
     const browser = await puppeteer.launch({
         args: chrome.args,
