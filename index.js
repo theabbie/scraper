@@ -41,7 +41,7 @@ else {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    if (!req.query.join) {res.json(result)} else {res.end(result.type("text/plain").map(x => x.text).join(req.query.join))}
+    if (!req.query.join) {res.json(result)} else {res.type("text/plain").end(result.map(x => x.text).join(req.query.join))}
             })
         }
     }
