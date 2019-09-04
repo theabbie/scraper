@@ -1,5 +1,5 @@
 const express = require('express');
-const app = express()
+const app = express();
 const req = require('request');
 const rp = require('request-promise');
 app.set('json spaces', 2)
