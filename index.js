@@ -9,7 +9,7 @@ const $ = require("cheerio");
     
 app.get('/', async function(req, res) {
     try {
-        var pad = req.query.pad || "#";
+        var pad = req.query.pad || "@";
         res.setHeader("Access-Control-Allow-Origin","*");
         if (req.query.static!="true") {
     const browser = await puppeteer.launch({
@@ -31,7 +31,7 @@ app.get('/', async function(req, res) {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("#").join(x.text)).join(req.query.join))}
+    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text)).join(req.query.join))}
 }
 else {
     rp(req.query.url).then(function(code){
@@ -43,7 +43,7 @@ else {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("#").join(x.text)).join(req.query.join))}
+    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text)).join(req.query.join))}
             })
         }
     }
