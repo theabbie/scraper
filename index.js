@@ -31,7 +31,7 @@ app.get('/', async function(req, res) {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text==""?x.attrib:x.text)).join(req.query.join))}
+    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
 }
 else {
     rp(req.query.url).then(function(code){
@@ -43,7 +43,7 @@ else {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text==""?x.attrib:x.text)).join(req.query.join))}
+    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
             })
         }
     }
