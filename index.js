@@ -9,7 +9,7 @@ const $ = require("cheerio");
     
 app.get('/', async function(req, res) {
     try {
-        var pad = req.query.pad || "@";
+        var pad = req.query.pad || "@$";
         res.setHeader("Access-Control-Allow-Origin","*");
         if (req.query.static!="true") {
     const browser = await puppeteer.launch({
