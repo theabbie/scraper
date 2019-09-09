@@ -18,7 +18,7 @@ app.get('/', async function(req, res) {
         headless: chrome.headless,
     });
   const page = await browser.newPage();
-  await page.setUserAgent(req.headers["user-agent"]);
+  await page.setUserAgent("Mozilla/5.0 (Linux; Android 9; Redmi Note 7 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Mobile Safari/537.36");
     await page.setViewport({width: 1366, height: 654});
     await page.goto(req.query.url);
     await page.waitFor(parseInt(req.query.t) || 4000)
