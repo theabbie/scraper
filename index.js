@@ -34,7 +34,13 @@ app.get('/', async function(req, res) {
     if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
 }
 else {
-    rp(req.query.url).then(function(code){
+    var options = {
+    url: req.query.url,
+    headers: {
+    'User-Agent': 'Mozilla/5.0 (Linux; Android 9; Redmi Note 7 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Mobile Safari/537.36'
+      }
+    };
+    rp(options).then(function(code){
     res.setHeader("Access-Control-Allow-Origin", "*");
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
