@@ -58,4 +58,4 @@ else {
     }
 })
 
-app.listen(process.env.port)
+app.listen(process.env.port);
