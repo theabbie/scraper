@@ -48,6 +48,14 @@ else {
     if(patt.test($(this).attr(req.query.attribs))) {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
+    }).catch(function(xcode) {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    var result = []
+    var patt = new RegExp(req.query.patt || ".*","i");
+    $(req.query.sel,xcode).each(function(i,elem) {
+    if(patt.test($(this).attr(req.query.attribs))) {
+    result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
+    }
     })
     if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
             })
