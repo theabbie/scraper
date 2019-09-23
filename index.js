@@ -68,4 +68,4 @@ if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x 
     }
 })
 
-app.listen(process.env.port);
+app.listen(process.env.port)
