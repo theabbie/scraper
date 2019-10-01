@@ -42,8 +42,7 @@ else {
     };
     rp(options).then(function(code){
     res.setHeader("Access-Control-Allow-Origin", "*");
-    if (req.query.raw=="true") {res.send(code);}
-    else {
+    if (req.query.raw=="true") {res.type("application/xml").end(code);}
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
     $(req.query.sel,code).each(function(i,elem) {
@@ -51,8 +50,7 @@ else {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
-     }       
+    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}      
 }).catch(function(xcode) {
 res.setHeader("Access-Control-Allow-Origin", "*");
     var result = []
@@ -64,7 +62,7 @@ res.setHeader("Access-Control-Allow-Origin", "*");
 })
 if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
 })
-        }
+   }
     }
     catch (error) {
         res.end(error.message)
