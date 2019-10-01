@@ -42,7 +42,8 @@ else {
     };
     rp(options).then(function(code){
     res.setHeader("Access-Control-Allow-Origin", "*");
-    if (req.query.raw=="true") {res.json(code);res.end();}
+    if (req.query.raw=="true") {res.send(code);}
+    else {
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
     $(req.query.sel,code).each(function(i,elem) {
@@ -51,7 +52,8 @@ else {
     }
     })
     if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
-            }).catch(function(xcode) {
+     }       
+}).catch(function(xcode) {
 res.setHeader("Access-Control-Allow-Origin", "*");
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
