@@ -23,6 +23,8 @@ app.get('/', async function(req, res) {
     await page.goto(req.query.url);
     await page.waitFor(parseInt(req.query.t) || 4000)
     var code = await page.evaluate(function() {return document.querySelector("html").outerHTML})
+    if (req.query.raw=="true") {res.type("application/json").end(code);}
+    else {
     res.setHeader("Access-Control-Allow-Origin", "*");
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
@@ -32,6 +34,7 @@ app.get('/', async function(req, res) {
     }
     })
     if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
+   }
 }
 else {
     var options = {
