@@ -42,7 +42,7 @@ else {
     };
     rp(options).then(function(code){
     res.setHeader("Access-Control-Allow-Origin", "*");
-    if (req.query.raw=="true") {res.type("application/json").end(code)}
+    if (req.query.raw=="true") {res.json(code);res.end();}
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
     $(req.query.sel,code).each(function(i,elem) {
