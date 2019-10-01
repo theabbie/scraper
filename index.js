@@ -23,6 +23,7 @@ app.get('/', async function(req, res) {
     await page.goto(req.query.url);
     await page.waitFor(parseInt(req.query.t) || 4000)
     var code = await page.evaluate(function() {return document.querySelector("html").outerHTML})
+    if (req.query.var) {var varr = req.query.varr;code = await page.evaluate(function(varr) {'return '+varr},varr)}
     if (req.query.raw=="true") {res.type("application/json").end(code);}
     else {
     res.setHeader("Access-Control-Allow-Origin", "*");
