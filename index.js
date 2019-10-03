@@ -55,7 +55,7 @@ else {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    if (!req.query.join) {res.json(result)} else {res.type("html").end(result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}      
+    if (!req.query.join) {res.json(result)} else {res.type("html").end(`<meta name="viewport" content="width=device-width, initial-scale=1">`+result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}      
    }
 }).catch(function(xcode) {
 res.setHeader("Access-Control-Allow-Origin", "*");
