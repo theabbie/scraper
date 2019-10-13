@@ -34,7 +34,7 @@ app.get('/', async function(req, res) {
     result.push({"attrib": $(this).attr(req.query.attribs), "text": $(this).text()})
     }
     })
-    if (!req.query.join) {res.json(result)} else {res.type("html").end(`<meta name="viewport" content="width=device-width, initial-scale=1"><style>@font-face {font-family: kirvy; src: url('https://cdn.jsdelivr.net/gh/theabbie/theabbie.github.io/files/kirvy.otf');}1 * {font-family: kirvy; letter-spacing: 3px; word-spacing: 6px; line-height: 125%; font-weight: 900;}</style>`+result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
+    if (!req.query.join) {res.json(result)} else {res.type("html").end(`<meta name="viewport" content="width=device-width, initial-scale=1"><style>@font-face {font-family: kirvy; src: url('https://cdn.jsdelivr.net/gh/theabbie/theabbie.github.io/files/kirvy.otf');} * {font-family: kirvy; letter-spacing: 3px; word-spacing: 6px; line-height: 125%; font-weight: 900;}</style>`+result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
    }
 }
 else {
