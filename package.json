@@ -12,7 +12,7 @@
     "chrome-aws-lambda": "^1.18.1",
     "express": "^4.17.1",
     "puppeteer": "^1.18.1",
-    "puppeteer-core": "^1.18.1",
+    "puppeteer-core": "^2.0.0",
     "cheerio": "^0.22.0"
   },
   "author": "",
