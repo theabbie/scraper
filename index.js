@@ -25,6 +25,7 @@ app.get('/', async function(req, res) {
     var code = await page.evaluate(function() {return document.querySelector("html").outerHTML})
     if (req.query.var) {var varr = req.query.varr;code = await page.evaluate(function(varr) {'return '+varr},varr)}
     if (req.query.raw=="true") {res.type("application/json").end(code);}
+    if (req.query.new=="true") {res.end(page.url());}
     else {
     res.setHeader("Access-Control-Allow-Origin", "*");
     var result = []
