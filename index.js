@@ -8,7 +8,8 @@ const puppeteer = require('puppeteer-core');
 const $ = require("cheerio");
     
 app.get('/', async function(req, res) {
-    try {
+res.setHeader("Access-Control-Allow-Origin", "*");
+try {
         var pad = req.query.pad || "@$";
         res.setHeader("Access-Control-Allow-Origin","*");
         if (req.query.static!="true") {
@@ -27,7 +28,6 @@ app.get('/', async function(req, res) {
     if (req.query.raw=="true") {res.type("application/json").end(code);}
     if (req.query.new=="true") {res.end(page.url());}
     else {
-    res.setHeader("Access-Control-Allow-Origin", "*");
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
     $(req.query.sel,code).each(function(i,elem) {
