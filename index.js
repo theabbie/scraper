@@ -22,7 +22,8 @@ try {
   await page.setUserAgent("Mozilla/5.0 (Linux; Android 9; Redmi Note 7 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Mobile Safari/537.36");
     await page.setViewport({width: 1366, height: 654});
     await page.goto(req.query.url);
-    await page.waitFor(parseInt(req.query.t) || 4000)
+    await page.waitFor(parseInt(req.query.t) || 4000);
+    if (req.query.ss=="true") {res.type("image/png").end(await page.screenshot())}
     var code = await page.evaluate(function() {return document.querySelector("html").outerHTML})
     if (req.query.var) {var varr = req.query.varr;code = await page.evaluate(function(varr) {'return '+varr},varr)}
     if (req.query.raw=="true") {res.type("application/json").end(code);}
