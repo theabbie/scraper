@@ -19,6 +19,10 @@ try {
         headless: chrome.headless,
     });
   const page = await browser.newPage();
+  await page.setRequestInterception(true);
+  page.on('request', request => {
+  console.log(request.url());
+  });
   await page.setUserAgent("Mozilla/5.0 (Linux; Android 9; Redmi Note 7 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Mobile Safari/537.36");
     await page.setViewport({width: (parseInt(req.query.w) || 1366), height: (parseInt(req.query.h) || 654)});
     await page.goto(req.query.url);
