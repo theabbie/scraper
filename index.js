@@ -18,6 +18,7 @@ try {
         executablePath: await chrome.executablePath,
         headless: chrome.headless,
     });
+  console.log(browser.wsEndpoint());
   const page = await browser.newPage();
   await page.setRequestInterception(true);
   page.on('request', request => {
