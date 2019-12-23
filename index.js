@@ -31,7 +31,7 @@ try {
     await page.waitFor(parseInt(req.query.t) || 4000);
     if (req.query.ss=="true") {res.type("image/png").end(await page.screenshot({fullPage: true}))}
     var code = await page.evaluate(function() {return document.querySelector("html").outerHTML})
-    if (req.query.var) {var varr = req.query.varr;var rslt = await page.evaluate(varr);res.end(rslt);}
+    if (req.query.var) {var varr = req.query.var;var rslt = await page.evaluate(varr);res.end(rslt);}
     if (req.query.raw=="true") {res.type("application/json").end(code);}
     if (req.query.new=="true") {res.end(page.url());}
     var result = []
