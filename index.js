@@ -31,10 +31,9 @@ try {
     await page.waitFor(parseInt(req.query.t) || 4000);
     if (req.query.ss=="true") {res.type("image/png").end(await page.screenshot({fullPage: true}))}
     var code = await page.evaluate(function() {return document.querySelector("html").outerHTML})
-    if (req.query.var) {var varr = req.query.varr;var rslt = await page.evaluate(function(varr) {'return '+varr},varr);res.end(rslt);}
+    if (req.query.var) {var varr = req.query.varr;var rslt = await page.evaluate(function(varr) {varr},varr);res.end(rslt);}
     if (req.query.raw=="true") {res.type("application/json").end(code);}
     if (req.query.new=="true") {res.end(page.url());}
-    else {
     var result = []
     var patt = new RegExp(req.query.patt || ".*","i");
     $(req.query.sel,code).each(function(i,elem) {
@@ -43,7 +42,6 @@ try {
     }
     })
     if (!req.query.join) {res.json(result)} else {res.type("html").end(`<meta name="viewport" content="width=device-width, initial-scale=1"><style>@font-face {font-family: kirvy; src: url('https://cdn.jsdelivr.net/gh/theabbie/theabbie.github.io/files/kirvy.otf');} * {font-family: kirvy; letter-spacing: 3px; word-spacing: 6px; line-height: 125%; font-weight: 900;}</style>`+result.map(x => pad.split("@").join(x.text).split("$").join(x.attrib)).join(req.query.join))}
-   }
 }
 else {
     var options = {
