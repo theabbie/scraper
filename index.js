@@ -27,7 +27,7 @@ try {
   });
   await page.setUserAgent("Mozilla/5.0 (Linux; Android 9; Redmi Note 7 Pro) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.132 Mobile Safari/537.36");
     await page.setViewport({width: (parseInt(req.query.w) || 1366), height: (parseInt(req.query.h) || 654)});
-    await page.goto(req.query.url);
+    await page.goto(req.query.url,{referer: req.query.ref || 'https://google.com'});
     await page.waitFor(parseInt(req.query.t) || 4000);
     if (req.query.ss=="true") {res.type("image/png").end(await page.screenshot({fullPage: true}))}
     var code = await page.evaluate(function() {return document.querySelector("html").outerHTML})
