@@ -81,4 +81,4 @@ if (!req.query.join) {res.json(result)} else {res.type("html").end(`<meta name="
     }
 })
 
-app.listen(process.env.port)
+app.listen(process.env.port) 
