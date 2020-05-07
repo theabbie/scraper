@@ -12,7 +12,7 @@
     "request-promise": "^4.2.4",
     "chrome-aws-lambda": "^1.18.1",
     "express": "^4.17.1",
-    "puppeteer": "^1.18.1",
+    "puppeteer": "^3.0.4",
     "puppeteer-core": "^1.18.1",
     "cheerio": "^0.22.0"
   },
